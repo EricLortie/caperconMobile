@@ -27,24 +27,15 @@ class ScheduleByTime extends Component {
   componentDidMount() {
     //loadFeaturedContentData(this);
     // Handling Deep Linking
-    //loadScheduleData(this, 'schedule_by_time');
-
-    Promise.resolve(loadScheduleData(this, 'schedule_by_time'))
-      .then((schedule) => {
-        console.log("fuuuuuuck");
-          console.log(schedule);
-        this.setState({Schedule: schedule});
-    });
-
+    loadScheduleData(this, 'schedule_by_time');
   }
-  async componentWillReceiveProps() {
-    //loadScheduleData(this, 'schedule_by_time');
-        Promise.resolve(loadScheduleData(this, 'schedule_by_time'))
-          .then((schedule) => {
-            console.log("PROPS RECIEVED!");
-            console.log(schedule);
-            this.setState({Schedule: schedule});
-        });
+  componentWillMount() {
+    //loadFeaturedContentData(this);
+    // Handling Deep Linking
+    loadScheduleData(this, 'schedule_by_time');
+  }
+  componentWillReceiveProps() {
+    loadScheduleData(this, 'schedule_by_time');
   }
 
   render() {

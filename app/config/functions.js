@@ -238,9 +238,8 @@ export function loadScheduleData(component, string) {
         });
 
         console.log(items);
-        //component.setState({ Schedule: items });
+        component.setState({ Schedule: items });
         console.log("component state set");
-        return items;
       });
 
   } catch (error) {
