@@ -5,7 +5,7 @@ import {
   ScrollView,
   Dimensions,
   Image,
-  Linking
+  Linking, TouchableHighlight
 } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { styles, primaryBGColour, primaryFontColour, primaryAccentColour, secondaryFontColour, secondaryBGColour, secondaryHighlightColour } from '../styles/common';
@@ -33,11 +33,12 @@ class FeaturedContent extends Component {
     return (
       <View style={styles.fc_view}>
         <Text style={styles.fc_label}>{"Promoted Content"}</Text>
-        <Image
-          style={{ width: maxWidth-20, height: 54, flex: 1 }}
-          source={{uri: fc.img_url}}
-          onPress={() => this.openExternalURL(fc.ad_url)}>
-        </Image>
+        <TouchableHighlight style={{ width: maxWidth-20, height: 54, flex: 1 }} onPress={() => this.openExternalURL(fc.ad_url)}>
+          <Image
+            style={{ width: maxWidth-20, height: 54, flex: 1 }}
+            source={{uri: fc.img_url}}>
+          </Image>
+        </TouchableHighlight>
       </View>
     )
 

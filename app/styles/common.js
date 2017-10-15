@@ -26,6 +26,12 @@ export const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: secondaryBGColour
   },
+  altWithPaddingAndBorder: {
+    padding: 5,
+    backgroundColor: secondaryBGColour,
+    borderColor: secondaryHighlightColour,
+    borderWidth: 5
+  },
   spellContainer: {
     padding: 20,
   },
@@ -92,8 +98,15 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: secondaryFontColour
   },
+  subHeaderText: {
+    fontSize: 15,
+    padding: 4,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: primaryFontColour
+  },
   altText: {
-    padding: 5,
+    padding: 3,
     color: secondaryFontColour,
     fontWeight: 'bold'
   },
@@ -278,6 +291,29 @@ export const styles = StyleSheet.create({
     marginBottom: 2,
     color: 'black',
     textAlign: 'center',
+  },
+  eventNameText: {
+    fontSize: 20,
+    color: secondaryFontColour,
+    alignSelf: 'stretch',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    flex: 1
+  },
+  eventVenueText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: secondaryFontColour,
+    alignSelf: 'stretch',
+    textAlign: 'left',
+    flex: 1
+  },
+  eventTimeText: {
+    fontSize: 16,
+    color: secondaryFontColour,
+    alignSelf: 'stretch',
+    textAlign: 'left',
+    flex: 1
   }
 
 });

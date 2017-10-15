@@ -75,7 +75,7 @@ class Panels extends Component {
 
           <Image
             style={{ width: maxWidth, height: 200 }}
-            source={require('../assets/panelHeader.jpeg')}
+            source={require('../assets/panelsHeader.jpeg')}
             resizeMode="cover">
           </Image>
 

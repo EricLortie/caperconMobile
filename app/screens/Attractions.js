@@ -42,7 +42,7 @@ class Attractions extends Component {
 
         <Image
           style={{ width: maxWidth, height: 200 }}
-          source={require('../assets/cosplayHeader.jpg')}
+          source={require('../assets/attractionsHeader.jpeg')}
           resizeMode="cover" />
 
         <View style={styles.altWithPadding}>

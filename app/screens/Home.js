@@ -74,6 +74,7 @@ class HomePage extends Component {
                   title={<Text style={styles.smallListText}>{news.title.rendered}</Text>}
                   underlayColor={secondaryBGColour}
                   chevronColor={secondaryHighlightColour}
+                  hideChevron={true}
                 />
               ))}
           </View>

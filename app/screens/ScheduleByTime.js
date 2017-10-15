@@ -18,49 +18,32 @@ class ScheduleByTime extends Component {
     super(props);
 
     this.state = {
-      Schedule: [],
+      Data: [],
       FeaturedContent: []
     }
   }
 
+  onLearnMore = (artist) => {
+    this.props.navigation.navigate('ArtistDetail', { ...artist });
+  };
+
   // You want to load subscriptions not only when the component update but also when it gets mounted.
   componentDidMount() {
-    //loadFeaturedContentData(this);
-    // Handling Deep Linking
-    loadScheduleData(this, 'schedule_by_time');
-  }
-  componentWillMount() {
-    //loadFeaturedContentData(this);
-    // Handling Deep Linking
     loadScheduleData(this, 'schedule_by_time');
   }
   componentWillReceiveProps() {
     loadScheduleData(this, 'schedule_by_time');
   }
+  pad(val){
+     return (val<10) ? '0' + val : val;
+   }
 
   render() {
-
     // Handle case where the response is not here yet
-      if ( !this.state.Schedule ) {
-         // Note that you can return false it you want nothing to be put in the dom
-         // This is also your chance to render a spinner or something...
-         return (
-           <LoadingScreen />
-         )
-      }
-
-      // Gives you the opportunity to handle the case where the ajax request
-      // completed but the result array is empty
-      if ( this.state.Schedule.length === 0 ) {
-        return (
-          <LoadingScreen />
-        )
-      }
 
       const maxWidth = Dimensions.get('window').width;
 
       return (
-
         <ScrollView style={styles.defaultContainer}>
 
           <Image
@@ -68,51 +51,59 @@ class ScheduleByTime extends Component {
             source={require('../assets/artistHeader.jpg')}
             resizeMode="cover">
           </Image>
+            {this.state.Data.map((date_data)=> {
+              return (
+                <View key={date_data[0]}>
+                  <View style={styles.altWithPadding}>
+                    <Text style={styles.altHeaderText}>{date_data[0]}</Text>
+                  </View>
+                  {date_data[1].map((events)=> {
+                    let time = events[0]*1000;
+                    let hours = new Date(time).getHours();
+                    let mins = new Date(time).getMinutes();
 
-          <View key={1111} style={styles.altWithPadding}>
-            <Text key={1111} style={styles.altHeaderText}>"HEY"+{Object.keys(this.state.Schedule)[1]}</Text>
-          </View>
+                    return (
+                    <View key={events[0]}>
 
-          {this.state.Schedule.map((date_data) => {
-            console.log("Loop motherfucker");
-            console.log(date_data);
-              let date = date_data[0];
-              let dates = date_data[1];
-              <View key={date} style={styles.altWithPadding}>
-                <Text key={date} style={styles.altHeaderText}>"HEY"+{date}</Text>
-              </View>
-
-              {dates.map((time_data) => {
-                let time = time_data[0];
-                let shows = time_data[1];
-                <View key={time}>
-                  <Text key={time} style={styles.altHeaderText}>{time}</Text>
-
-                  <View key={time} style={styles.metaPanel}>
-                      {shows.map((schedule) => {
+                      <View key={events[0]} style={styles.metaPanel}>
+                      {events[1].map((schedEvent) => {
+                        return (
                         <ListItem
-                          key={schedule.slug+(Math.random() * (1000 - 0))}
+                          key={schedEvent.slug}
                           subtitle={
-                            <View style={styles.subtitleView}>
-                              <Text style={styles.subtitleText}>{schedule.name}</Text>
-                              <Text style={styles.subtitleText}>{schedule.venue}</Text>
-                              <Text style={styles.subtitleText}>{schedule.start_time} to {schedule.end_time}</Text>
+                            <View>
+                              <View style={styles.subtitleView}>
+                                <Text style={styles.eventNameText}>{schedEvent.name}</Text>
+                              </View>
+                              <View style={styles.subtitleView}>
+                                <Text style={styles.eventVenueText}>{schedEvent.venue}</Text>
+                              </View>
+                              <View style={styles.subtitleView}>
+                                <Text style={styles.eventTimeText}>{schedEvent.start_time} to {schedEvent.end_time}</Text>
+                              </View>
                             </View>
                           }
-                          onPress={() => this.onLearnMore({name: schedule.name, description: schedule.promotion, photo: schedule.photo_url, start: schedule.start_time, end: schedule.end_time})}
-                          underlayColor={secondaryBGColour}
-                          chevronColor={secondaryHighlightColour}
+                          hideChevron={true}
                         />
+                      )
                       })}
-                  </View>
+                      </View>
+                    </View>
+                  )
+                  })}
+
                 </View>
-              })}
+              )
             })}
 
         </ScrollView>
       )
 
   }
+
+
 }
+
+
 
 export default ScheduleByTime;

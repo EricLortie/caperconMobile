@@ -75,7 +75,7 @@ class Vendors extends Component {
 
           <Image
             style={{ width: maxWidth, height: 200 }}
-            source={require('../assets/guestHeader.jpeg')}
+            source={require('../assets/vendorsHeader.jpg')}
             resizeMode="cover">
           </Image>
 

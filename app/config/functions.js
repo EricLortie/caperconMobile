@@ -30,6 +30,7 @@ export function cleanHTML(html){
   return html.replace(/“|`/g, '"').replace(/<damage>/, "[damage]").replace(/<type>/, "[type]").replace(/<elemental>/, "[elemental]")
 }
 
+
 export class LoadingScreen extends Component {
 
     render() {
@@ -216,7 +217,6 @@ export function loadData(component, string) {
 }
 
 export function loadScheduleData(component, string) {
-  console.log(`https://capercon.ca/wp-json/wp/v2/${string}`);
   try {
       // Load Data from API
       fetch(`https://capercon.ca/wp-json/wp/v2/${string}`, { })
@@ -232,13 +232,19 @@ export function loadScheduleData(component, string) {
             responseJson[date][time].map((show) => {
               shows.push(show);
             });
-            times.push([time, shows]);
+            shows = shows.sort(function(a,b){return a[0] > b[0]});
+            times.push([time* 1000, shows]);
           });
+          times = times.sort(function(a,b){return a[0] > b[0]});
           items.push([date, times]);
         });
+        let sched = [];
+        sched.push(items[items.findIndex(function(item) {return item[0] == "Friday October 20th"; })]);
+        sched.push(items[items.findIndex(function(item) {return item[0] == "Saturday October 21st"; })]);
+        sched.push(items[items.findIndex(function(item) {return item[0] == "Sunday October 22nd"; })]);
+        //items = items.sort(function(a,b){return a[0] > b[0]});
 
-        console.log(items);
-        component.setState({ Schedule: items });
+        component.setState({ Data: sched });
         console.log("component state set");
       });
 
